@@ -95,7 +95,14 @@
       "unitTestRunner": "vitest-analog"
     },
     "@nx/angular:component": {
-      "style": "css"
+      "style": "css",
+      "type": "component"
+    },
+    "@nx/angular:service": {
+      "type": "service"
+    },
+    "@nx/angular:interface": {
+      "type": "interface"
     }
   },
   "analytics": false
