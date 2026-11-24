@@ -49,14 +49,14 @@ export const appRoutes: Route[] = [
             (m) => m.ForgetPasswordVerifyOtpComponent,
           ),
       },
-      // {
-      //   path: 'reset-password',
-      //   canActivate: [verifyCodeGuard],
-      //   loadComponent: () =>
-      //     import('./features/auth/reset-password/reset-password.component').then(
-      //       (m) => m.ResetPasswordComponent,
-      //     ),
-      // },
+      {
+        path: 'reset-password',
+        // canActivate: [verifyCodeGuard],
+        loadComponent: () =>
+          import('./features/authentication/reset-password/reset-password.component').then(
+            (m) => m.ResetPasswordComponent,
+          ),
+      },
     ],
   },
 ];

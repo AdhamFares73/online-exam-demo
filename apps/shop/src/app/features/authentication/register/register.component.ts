@@ -1,11 +1,5 @@
 import { Component, computed, inject, signal } from '@angular/core';
-import {
-  AbstractControl,
-  FormBuilder,
-  ReactiveFormsModule,
-  ValidationErrors,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RegisterEmailComponent } from './register-email/register-email.component';
 import { RegisterOtpComponent } from './register-otp/register-otp.component';
 import { RegisterInfoComponent } from './register-info/register-info.component';
@@ -13,6 +7,7 @@ import { RegisterPasswordComponent } from './register-password/register-password
 import { RegisterProgressComponent } from './register-progress/register-progress.component';
 import { ButtonComponent } from '../../../shared/components/button/button.component';
 import { RouterLink } from '@angular/router';
+import { passwordMatchValidator } from '../model/password-match.validator';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -35,8 +30,6 @@ export class RegisterComponent {
 
   readonly showProgress = computed(() => this.currentStep() > 0);
 
-  // Email is hidden from the progress bar.
-  // OTP = 25%, Info = 50%, Password = 75%.
   readonly progress = computed(() => this.currentStep() * 25);
 
   readonly emailForm = this.fb.control('', [
@@ -61,19 +54,8 @@ export class RegisterComponent {
       password: ['', [Validators.required, Validators.minLength(8)]],
       confirmPassword: ['', Validators.required],
     },
-    { validators: this.passwordMatchValidator },
+    { validators: passwordMatchValidator('password', 'confirmPassword') },
   );
-
-  private passwordMatchValidator(
-    control: AbstractControl,
-  ): ValidationErrors | null {
-    const password = control.get('password')?.value;
-    const confirmPassword = control.get('confirmPassword')?.value;
-
-    if (!password || !confirmPassword) return null;
-
-    return password === confirmPassword ? null : { passwordMismatch: true };
-  }
 
   next(): void {
     const currentControl = [
@@ -91,9 +73,6 @@ export class RegisterComponent {
       this.submit();
       return;
     }
-
-    // TODO: Call email API before leaving step 0.
-    // TODO: Verify OTP through API before leaving step 1.
 
     this.currentStep.update((step) => step + 1);
   }
