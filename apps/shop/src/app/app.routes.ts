@@ -27,20 +27,20 @@ export const appRoutes: Route[] = [
             (m) => m.LoginComponent,
           ),
       },
-      // {
-      //   path: 'register',
-      //   loadComponent: () =>
-      //     import('./features/auth/register-page/register-page.component').then(
-      //       (m) => m.RegisterPageComponent,
-      //     ),
-      // },
-      // {
-      //   path: 'forget-password',
-      //   loadComponent: () =>
-      //     import('./features/auth/forget-password/forget-password.component').then(
-      //       (m) => m.ForgetPasswordComponent,
-      //     ),
-      // },
+      {
+        path: 'register',
+        loadComponent: () =>
+          import('./features/authentication/register/register.component').then(
+            (m) => m.RegisterComponent,
+          ),
+      },
+      {
+        path: 'forget-password',
+        loadComponent: () =>
+          import('./features/authentication/forget-password/forget-password.component').then(
+            (m) => m.ForgetPasswordComponent,
+          ),
+      },
       // {
       //   path: 'verify-reset-code',
       //   canActivate: [forgetpasswordGuard],

@@ -1,3 +1,33 @@
-<p>
-  login works!
-</p>
+<div class="login">
+  <h2 class="login-header">Login</h2>
+
+  <div class="login-body">
+    <form>
+      <app-input
+        forId="username"
+        type="text"
+        placeholder="Enter Username"
+        labelName="Username"
+      />
+      <app-input
+        forId="password"
+        type="password"
+        placeholder="Enter password"
+        labelName="Password"
+      />
+
+      <div class="forget-password">
+        <a routerLink="/auth/forget-password">Forget Your Psasword?</a>
+      </div>
+      <div class="footer">
+        <app-button [value]="'Login'" bgColor="#155dfc" />
+        <div class="footer-register">
+          <p class="register">
+            Don’t have an account?
+            <a routerLink="/auth/register">Create yours</a>
+          </p>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

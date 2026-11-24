@@ -1,0 +1,29 @@
+<div class="space-y-6">
+  <div class="space-y-2">
+    <!-- <label for="email" class="block text-sm font-medium text-gray-700">
+      Email Address
+    </label>
+
+    <input
+      id="email"
+      type="email"
+      [formControl]="emailControl"
+      placeholder="example@email.com"
+      class="w-full border border-gray-300 px-4 py-4 outline-none focus:border-[#165DFF] focus:ring-2 focus:ring-blue-100"
+    /> -->
+    <app-input
+      forId="email"
+      type="email"
+      placeholder="user@example.com"
+      labelName="Email"
+      [formControl]="emailControl"
+    />
+    @if (emailControl.touched && emailControl.hasError('required')) {
+      <p class="text-sm text-red-500">Email is required.</p>
+    }
+
+    @if (emailControl.touched && emailControl.hasError('email')) {
+      <p class="text-sm text-red-500">Enter a valid email address.</p>
+    }
+  </div>
+</div>

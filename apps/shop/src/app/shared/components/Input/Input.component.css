@@ -1,0 +1,26 @@
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 10px;
+}
+.form-control {
+  height: 46px;
+  padding: 10px;
+  border: 1px solid #e5e7eb;
+  width: 100%;
+}
+.label {
+  font-weight: 500;
+  font-size: 16px;
+  color: #1f2937;
+  margin-bottom: 6px;
+}
+svg {
+  width: 18px;
+  height: 18px;
+  color: #969292;
+  &:hover {
+    cursor: pointer;
+  }
+}

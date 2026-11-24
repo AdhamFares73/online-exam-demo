@@ -1,0 +1,21 @@
+.btn {
+  /* background-color: #155dfc; */
+  /* color: #fff; */
+  width: 100%;
+  text-align: center;
+  border: 1px solid #155dfc;
+  height: 46px;
+  &:hover {
+    cursor: pointer;
+  }
+  span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    svg {
+      height: 16px;
+      width: 16px;
+    }
+  }
+}

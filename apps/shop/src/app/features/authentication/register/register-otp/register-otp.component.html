@@ -1,0 +1,48 @@
+<div class="space-y-6">
+  <div>
+    <h3 class="mb-3 text-2xl font-bold text-[#155DFC]">Verify OTP</h3>
+
+    <p class="text-sm text-gray-500">
+      Please enter the 6-digits code we have sent to:
+      <span class="font-medium text-gray-800"
+        >{{ email }}.
+        <button
+          (click)="editEmail($event)"
+          class="text-blue-600 underline text-base font-medium hover:cursor-pointer"
+        >
+          Edit
+        </button></span
+      >
+    </p>
+  </div>
+
+  <div class="space-y-2">
+    <label for="otp" class="block text-sm font-medium text-gray-700">
+      Verification Code
+    </label>
+
+    <div class="flex flex-col justify-center items-center gap-6">
+      <p-inputOtp
+        [formControl]="otpControl"
+        [integerOnly]="true"
+        [length]="6"
+      />
+      <p class="text-gray-500 text-sm">
+        You can request another code in: {{ counter() }}s
+      </p>
+    </div>
+    @if (otpControl.touched && otpControl.invalid) {
+      <p class="text-sm text-red-500">
+        Please enter a valid 6-digit verification code.
+      </p>
+    }
+  </div>
+
+  <button
+    type="button"
+    class="text-sm font-semibold text-[#165DFF] hover:text-blue-700"
+    (click)="otpControl.reset()"
+  >
+    Resend Code
+  </button>
+</div>

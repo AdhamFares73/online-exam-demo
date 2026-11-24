@@ -1,0 +1,57 @@
+.login {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.login-header {
+  font-weight: 700;
+  font-style: Bold;
+  font-size: 30px;
+  color: #000000;
+}
+/* .form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 10px;
+}
+.form-control {
+  height: 46px;
+  padding: 10px;
+  border: 1px solid #e5e7eb;
+}
+.label {
+  font-weight: 500;
+  font-size: 16px;
+  color: #1f2937;
+  margin-bottom: 6px;
+} */
+.forget-password {
+  text-align: right;
+  a {
+    font-weight: 500;
+    font-size: 14px;
+    color: #155dfc;
+  }
+}
+.footer {
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+  padding-top: 40px;
+}
+
+.footer-register {
+  text-align: center;
+  .register {
+    color: #6b7280;
+    font-weight: 500;
+    font-size: 14px;
+    a {
+      color: #155dfc;
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+}
