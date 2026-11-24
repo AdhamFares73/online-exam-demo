@@ -41,14 +41,14 @@ export const appRoutes: Route[] = [
             (m) => m.ForgetPasswordComponent,
           ),
       },
-      // {
-      //   path: 'verify-reset-code',
-      //   canActivate: [forgetpasswordGuard],
-      //   loadComponent: () =>
-      //     import('./features/auth/verify-reset-code/verify-reset-code.component').then(
-      //       (m) => m.VerifyResetCodeComponent,
-      //     ),
-      // },
+      {
+        path: 'verify-reset-code',
+        // canActivate: [forgetpasswordGuard],
+        loadComponent: () =>
+          import('./features/authentication/forget-password-verify-otp/forget-password-verify-otp.component').then(
+            (m) => m.ForgetPasswordVerifyOtpComponent,
+          ),
+      },
       // {
       //   path: 'reset-password',
       //   canActivate: [verifyCodeGuard],
