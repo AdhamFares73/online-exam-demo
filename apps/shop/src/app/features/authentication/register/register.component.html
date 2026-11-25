@@ -7,23 +7,26 @@
 
   @switch (currentStep()) {
     @case (0) {
-      <app-register-email [emailControl]="emailForm" />
+      <app-register-email [emailGroup]="emailForm" (emailSent)="next()" />
     }
 
     @case (1) {
       <app-register-otp
-        [otpControl]="otpForm"
-        [email]="emailForm.value ?? ''"
+        [email]="emailForm.get('email')?.value ?? ''"
         (back)="previous()"
+        (codeSent)="next()"
       />
     }
 
     @case (2) {
-      <app-register-info [infoForm]="infoForm" />
+      <app-register-info [infoForm]="infoForm" (nextStep)="next()" />
     }
 
     @case (3) {
-      <app-register-password [passwordForm]="passwordForm" />
+      <app-register-password
+        [passwordForm]="passwordForm"
+        (nextStep)="next()"
+      />
     }
 
     @case (4) {
@@ -35,23 +38,9 @@
     }
   }
 
-  @if (currentStep() < 4) {
-    <div class="button">
-      <app-button
-        [bgColor]="currentStep() === 3 ? '#155dfc' : '#eff6ff'"
-        [textColor]="currentStep() === 3 ? '#fff' : '#000'"
-        [value]="
-          currentStep() === 3
-            ? 'Create Account'
-            : currentStep() === 1
-              ? 'Verify Code'
-              : 'Next'
-        "
-        [showArrow]="currentStep() === 0 || currentStep() === 2"
-        (buttonClicked)="next()"
-      />
-    </div>
-  }
+  <!-- @if (currentStep() === 3) {
+
+  } -->
   @if (currentStep() === 0) {
     <div class="footer-register">
       <p class="register">

@@ -1,18 +1,32 @@
-<div class="space-y-6">
+<form class="space-y-6" [formGroup]="emailGroup" (ngSubmit)="submit()">
   <div class="space-y-2">
     <app-input
       forId="email"
       type="email"
       placeholder="user@example.com"
       labelName="Email"
-      [formControl]="emailControl"
+      formControlName="email"
     />
-    @if (emailControl.touched && emailControl.hasError('required')) {
+    @if (
+      emailGroup.get('email')?.touched &&
+      emailGroup.get('email')?.hasError('required')
+    ) {
       <p class="text-sm text-red-500">Email is required.</p>
     }
 
-    @if (emailControl.touched && emailControl.hasError('email')) {
+    @if (
+      emailGroup.get('email')?.touched &&
+      emailGroup.get('email')?.hasError('email')
+    ) {
       <p class="text-sm text-red-500">Enter a valid email address.</p>
     }
+    <div class="mt-9">
+      <app-button
+        bgColor="#eff6ff"
+        textColor="#000"
+        value="Next"
+        [showArrow]="true"
+      />
+    </div>
   </div>
-</div>
+</form>

@@ -1,35 +1,35 @@
 import {
   Component,
-  EventEmitter,
+  inject,
   Input,
   OnDestroy,
   OnInit,
-  Output,
+  output,
   signal,
 } from '@angular/core';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { InputOtpModule } from 'primeng/inputotp';
+import { ButtonComponent } from '../../../../shared/components/button/button.component';
 @Component({
   selector: 'app-register-otp',
   templateUrl: './register-otp.component.html',
   styleUrls: ['./register-otp.component.css'],
-  imports: [ReactiveFormsModule, InputOtpModule],
+  imports: [ReactiveFormsModule, InputOtpModule, ButtonComponent],
 })
 export class RegisterOtpComponent implements OnInit, OnDestroy {
-  ngOnDestroy(): void {
-    clearInterval(this.timer);
-  }
+  private readonly fb = inject(FormBuilder);
   readonly counter = signal(60);
   private timer?: ReturnType<typeof setInterval>;
+  readonly otpForm = this.fb.group({
+    code: ['', [Validators.required, Validators.pattern(/^\d{6}$/)]],
+  });
+  @Input({ required: true }) email = '';
+  readonly back = output<void>();
+  readonly codeSent = output<void>();
   ngOnInit(): void {
     this.startCouner();
   }
-  @Input({ required: true }) otpControl!: FormControl<string | null>;
-  @Input({ required: true }) email = '';
-  @Output() back = new EventEmitter();
-
-  editEmail(event: any) {
+  editEmail() {
     this.back.emit();
   }
   private startCouner() {
@@ -43,5 +43,16 @@ export class RegisterOtpComponent implements OnInit, OnDestroy {
         return value - 1;
       });
     }, 1000);
+  }
+  submit() {
+    this.otpForm.markAllAsTouched();
+    if (this.otpForm.invalid) return;
+
+    // Next
+    this.codeSent.emit();
+    console.log(this.otpForm.value);
+  }
+  ngOnDestroy(): void {
+    clearInterval(this.timer);
   }
 }
