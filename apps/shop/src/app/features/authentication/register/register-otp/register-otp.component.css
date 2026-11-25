@@ -1,0 +1,8 @@
+::ng-deep p-inputotp input {
+  width: 40px !important;
+  height: 40px !important;
+  border-radius: 0px !important;
+}
+::ng-deep p-inputotp {
+  gap: 10px;
+}

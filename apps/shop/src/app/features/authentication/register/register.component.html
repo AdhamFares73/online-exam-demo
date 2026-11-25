@@ -1,0 +1,63 @@
+<div class="w-full font-mono">
+  <!-- Progress -->
+  @if (showProgress()) {
+    <app-register-progress [currentStep]="currentStep() + 1" />
+  }
+  <h2 class="text-3xl font-bold text-[#202B3A] mb-2.5">Create Account</h2>
+
+  @switch (currentStep()) {
+    @case (0) {
+      <app-register-email [emailControl]="emailForm" />
+    }
+
+    @case (1) {
+      <app-register-otp
+        [otpControl]="otpForm"
+        [email]="emailForm.value ?? ''"
+        (back)="previous()"
+      />
+    }
+
+    @case (2) {
+      <app-register-info [infoForm]="infoForm" />
+    }
+
+    @case (3) {
+      <app-register-password [passwordForm]="passwordForm" />
+    }
+
+    @case (4) {
+      <div class="py-10 text-center">
+        <h3 class="text-2xl font-bold text-green-600">
+          Account Created Successfully!
+        </h3>
+      </div>
+    }
+  }
+
+  @if (currentStep() < 4) {
+    <div class="button">
+      <app-button
+        [bgColor]="currentStep() === 3 ? '#155dfc' : '#eff6ff'"
+        [textColor]="currentStep() === 3 ? '#fff' : '#000'"
+        [value]="
+          currentStep() === 3
+            ? 'Create Account'
+            : currentStep() === 1
+              ? 'Verify Code'
+              : 'Next'
+        "
+        [showArrow]="currentStep() === 0 || currentStep() === 2"
+        (buttonClicked)="next()"
+      />
+    </div>
+  }
+  @if (currentStep() === 0) {
+    <div class="footer-register">
+      <p class="register">
+        Already have an account ?
+        <a routerLink="/auth/login">Login</a>
+      </p>
+    </div>
+  }
+</div>

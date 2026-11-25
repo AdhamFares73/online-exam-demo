@@ -1,0 +1,69 @@
+<form [formGroup]="infoForm" class="space-y-3">
+  <div>
+    <h3 class="mb-2 text-2xl font-bold text-blue-600">
+      Tell us more about you
+    </h3>
+  </div>
+
+  <div class="grid grid-cols-2 gap-4">
+    <div>
+      <app-input
+        forId="firstName"
+        type="text"
+        placeholder="First name"
+        labelName="First name"
+        formControlName="firstName"
+      />
+    </div>
+
+    <div>
+      <app-input
+        forId="lastName"
+        type="text"
+        placeholder="Last name"
+        labelName="Last name"
+        formControlName="lastName"
+      />
+    </div>
+  </div>
+
+  <div>
+    <app-input
+      forId="username"
+      type="text"
+      placeholder="User Name"
+      labelName="User Name"
+      formControlName="username"
+    />
+  </div>
+
+  <div>
+    <div class="w-full">
+      <label for="phone" class="block mb-2 text-sm font-medium text-gray-700">
+        Phone number
+      </label>
+
+      <div
+        class="flex items-center w-full rounded-lg border border-gray-300 focus-within:border-blue-500 focus-within:ring-2 focus-within:ring-blue-100"
+      >
+        <button
+          type="button"
+          class="flex items-center gap-2 px-3 py-3 border-r border-gray-300 text-sm font-medium whitespace-nowrap hover:cursor-pointer"
+        >
+          <app-egy-flag />
+
+          <span class="text-sm text-gray-950 font-medium">EG (+20)</span>
+          <svg lucideChevronsUpDown style="height: 16px; width: 16px"></svg>
+        </button>
+
+        <input
+          id="phone"
+          type="tel"
+          placeholder="Enter phone number"
+          class="flex-1 min-w-0 px-3 py-3 outline-none rounded-r-lg"
+          formControlName="phone"
+        />
+      </div>
+    </div>
+  </div>
+</form>

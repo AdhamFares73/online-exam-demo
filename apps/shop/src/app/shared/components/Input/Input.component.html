@@ -1,0 +1,46 @@
+<div class="form-group">
+  <label [for]="forId" class="label">
+    {{ labelName }}
+    @if (mandatory) {
+      <span class="text-red-700">*</span>
+    }
+  </label>
+
+  <div class="relative">
+    <input
+      [id]="forId"
+      [type]="isPasswordVisible ? 'text' : type"
+      [placeholder]="placeholder"
+      [required]="mandatory"
+      (input)="onInput($event)"
+      (blur)="onBlur()"
+      [value]="inputValue"
+      class="form-control"
+      [class.pr-10]="type === 'password'"
+    />
+
+    @if (type === 'password') {
+      <button
+        type="button"
+        (click)="togglePasswordVisibility()"
+        class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700"
+        [attr.aria-label]="
+          isPasswordVisible ? 'Hide password' : 'Show password'
+        "
+      >
+        @if (isPasswordVisible) {
+          <!-- <i class="pi pi-eye-slash"></i> -->
+          <svg lucideEye></svg>
+        } @else {
+          <svg lucideEyeOff></svg>
+        }
+      </button>
+    }
+  </div>
+
+  @if (errorMessage !== '') {
+    <div class="alert alert-danger">
+      {{ errorMessage }}
+    </div>
+  }
+</div>

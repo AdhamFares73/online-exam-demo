@@ -1,0 +1,13 @@
+<button
+  class="btn"
+  [style.backgroundColor]="bgColor"
+  [style.color]="textColor"
+  (click)="clicked($event)"
+>
+  <span>
+    {{ value }}
+    @if (showArrow) {
+      <svg lucideChevronRight></svg>
+    }
+  </span>
+</button>

@@ -96,10 +96,12 @@
     },
     "@nx/angular:component": {
       "style": "css",
-      "type": "component"
+      "type": "component",
+      "skipTests": true
     },
     "@nx/angular:service": {
-      "type": "service"
+      "type": "service",
+      "skipTests": true
     },
     "@nx/angular:interface": {
       "type": "interface"
