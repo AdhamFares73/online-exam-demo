@@ -1,53 +1,69 @@
-<div class="auth-layout">
-  <aside class="auth-sidebar">
-    <div class="brand">
-      <div class="brand-icon">
+<div class="flex min-h-screen w-full bg-white">
+  <aside
+    class="hidden md:flex md:w-1/2 md:shrink-0 min-h-screen flex-col bg-linear-to-br from-[#f4f8ff] via-[#d6e9ff] to-[#f1f7ff] pl-[10%] pt-18"
+  >
+    <div class="flex items-center gap-3 text-xl font-semibold text-[#155DFC]">
+      <div>
         <app-folder-code />
       </div>
-
       <span>Exam App</span>
     </div>
 
-    <div class="sidebar-content">
-      <h2>Empower your learning journey with our smart exam platform.</h2>
+    <div class="mt-18 pr-[20%]">
+      <h2 class="mb-10 text-3xl font-bold leading-[1.3] text-[#202B3A]">
+        Empower your learning journey with our smart exam platform.
+      </h2>
 
-      <div class="features">
-        <div class="feature-item">
-          <div class="feature-icon">
+      <!-- Features -->
+      <div class="flex flex-col gap-6 pr-[27%]">
+        <div class="flex items-start gap-3.5">
+          <div
+            class="grid size-9 shrink-0 place-items-center border-2 border-[#155DFC] text-[#155DFC]"
+          >
             <app-brain />
           </div>
 
           <div>
-            <h3>Tailored Diplomas</h3>
-            <p>
+            <h3 class="mb-2 font-mono text-xl font-semibold text-[#155DFC]">
+              Tailored Diplomas
+            </h3>
+            <p class="text-base font-normal leading-normal text-gray-700">
               Choose from specialized tracks like Frontend, Backend, and Mobile
               Development.
             </p>
           </div>
         </div>
 
-        <div class="feature-item">
-          <div class="feature-icon">
+        <div class="flex items-start gap-3.5">
+          <div
+            class="grid size-9 shrink-0 place-items-center border-2 border-[#155DFC] text-[#155DFC]"
+          >
             <app-book-open-check />
           </div>
 
           <div>
-            <h3>Focused Exams</h3>
-            <p>
+            <h3 class="mb-2 font-mono text-xl font-semibold text-[#155DFC]">
+              Focused Exams
+            </h3>
+            <p class="text-base font-normal leading-normal text-gray-700">
               Access topic-specific tests including HTML, CSS, JavaScript, and
               more.
             </p>
           </div>
         </div>
 
-        <div class="feature-item">
-          <div class="feature-icon">
+        <div class="flex items-start gap-3.5">
+          <div
+            class="grid size-9 shrink-0 place-items-center border-2 border-[#155DFC] text-[#155DFC]"
+          >
             <app-rectangle-ellipsis />
           </div>
 
           <div>
-            <h3>Smart Multi-Step Forms</h3>
-            <p>
+            <h3 class="mb-2 font-mono text-xl font-semibold text-[#155DFC]">
+              Smart Multi-Step Forms
+            </h3>
+            <p class="text-base font-normal leading-normal text-gray-700">
               Choose from specialized tracks like Frontend, Backend, and Mobile
               Development.
             </p>
@@ -57,8 +73,10 @@
     </div>
   </aside>
 
-  <main class="auth-main">
-    <div class="auth-content">
+  <main
+    class="flex min-h-screen w-full items-center justify-center bg-white px-6 py-10 md:w-1/2 md:shrink-0 md:px-10"
+  >
+    <div class="w-full max-w-78">
       <router-outlet />
     </div>
   </main>
