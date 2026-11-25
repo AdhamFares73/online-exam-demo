@@ -1,18 +1,3 @@
-.footer-register {
-  text-align: center;
-  margin-top: 36px;
-  .register {
-    color: #6b7280;
-    font-weight: 500;
-    font-size: 14px;
-    a {
-      color: #155dfc;
-      &:hover {
-        cursor: pointer;
-      }
-    }
-  }
-}
 .button {
   margin-top: 36px;
 }

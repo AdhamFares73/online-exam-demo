@@ -1,5 +1,4 @@
 <div class="w-full font-mono">
-  <!-- Progress -->
   @if (showProgress()) {
     <app-register-progress [currentStep]="currentStep() + 1" />
   }
@@ -38,15 +37,5 @@
     }
   }
 
-  <!-- @if (currentStep() === 3) {
-
-  } -->
-  @if (currentStep() === 0) {
-    <div class="footer-register">
-      <p class="register">
-        Already have an account ?
-        <a routerLink="/auth/login">Login</a>
-      </p>
-    </div>
-  }
+  @if (currentStep() === 0) {}
 </div>
