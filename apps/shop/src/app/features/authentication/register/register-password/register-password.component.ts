@@ -11,11 +11,32 @@ import { ButtonComponent } from '../../../../shared/components/button/button.com
 })
 export class RegisterPasswordComponent {
   @Input({ required: true }) passwordForm!: FormGroup;
+  @Input({ required: true }) loading = false;
   readonly nextStep = output<void>();
   submit() {
     this.passwordForm.markAllAsTouched();
     if (this.passwordForm.invalid) return;
     this.nextStep.emit();
     console.log(this.passwordForm.value);
+  }
+  getErrorMessage(field: string): string {
+    const control = this.passwordForm.get(field);
+
+    if (!control || !control.errors || !control.touched) {
+      return '';
+    }
+
+    if (control.hasError('required')) {
+      return 'Field is required';
+    }
+
+    if (control.hasError('minlength') && field === 'password') {
+      return 'Password must be at least 8 characters.';
+    }
+
+    if (control.hasError('pattern') && field === 'password') {
+      return 'Password must include at least one uppercase letter and one special character.';
+    }
+    return '';
   }
 }

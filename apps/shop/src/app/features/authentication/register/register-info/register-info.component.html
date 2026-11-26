@@ -10,9 +10,11 @@
       <app-input
         forId="firstName"
         type="text"
-        placeholder="First name"
+        placeholder="Abdalla"
         labelName="First name"
         formControlName="firstName"
+        [errorMessage]="getErrorMessage('firstName')"
+        [mandatory]="true"
       />
     </div>
 
@@ -20,9 +22,11 @@
       <app-input
         forId="lastName"
         type="text"
-        placeholder="Last name"
+        placeholder="Ahmed"
         labelName="Last name"
         formControlName="lastName"
+        [errorMessage]="getErrorMessage('lastName')"
+        [mandatory]="true"
       />
     </div>
   </div>
@@ -31,20 +35,26 @@
     <app-input
       forId="username"
       type="text"
-      placeholder="User Name"
-      labelName="User Name"
+      placeholder="user123"
+      labelName="Username"
       formControlName="username"
+      [errorMessage]="getErrorMessage('username')"
+      [mandatory]="true"
     />
   </div>
 
   <div>
     <div class="w-full">
-      <label for="phone" class="block mb-2 text-sm font-medium text-gray-700">
-        Phone number
+      <label
+        for="phone"
+        class="block mb-2 text-base font-medium text-[#1f2937]"
+      >
+        Phone
       </label>
 
       <div
         class="flex items-center w-full rounded-lg border border-gray-300 focus-within:border-blue-500 focus-within:ring-2 focus-within:ring-blue-100"
+        [class.border-red-600]="getErrorMessage('phone') !== ''"
       >
         <button
           type="button"
@@ -58,19 +68,25 @@
         <input
           id="phone"
           type="tel"
-          placeholder="Enter phone number"
+          placeholder="01012345678"
           class="flex-1 min-w-0 px-3 py-3 outline-none rounded-r-lg"
           formControlName="phone"
         />
       </div>
+      @if (getErrorMessage('phone') !== '') {
+        <p class="text-sm text-red-500 mt-2">
+          {{ getErrorMessage('phone') }}
+        </p>
+      }
     </div>
   </div>
   <div class="mt-9">
     <app-button
-      bgColor="#eff6ff"
+      [bgColor]="infoForm.invalid ? '#DCDFE3' : '#eff6ff'"
       textColor="#000"
       value="Next"
       [showArrow]="true"
+      [isDisabled]="infoForm.invalid"
     />
   </div>
 </form>

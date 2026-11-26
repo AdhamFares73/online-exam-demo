@@ -61,3 +61,9 @@ export type OtpState =
   | { status: 'loading' }
   | { status: 'success'; data: ConfirmOtpResponse }
   | { status: 'error'; message: string };
+
+export type RegisterState =
+  | { status: 'idle' }
+  | { status: 'loading' }
+  | { status: 'success'; data: RegisterResponse }
+  | { status: 'error'; message: string };

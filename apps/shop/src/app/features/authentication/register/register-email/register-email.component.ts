@@ -7,15 +7,27 @@ import { catchError, exhaustMap, map, of, startWith, Subject, tap } from 'rxjs';
 import { AuthState } from '../../model/auth.model';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { RouterLink } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
+import { MessageService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
+import { RippleModule } from 'primeng/ripple';
 @Component({
   selector: 'app-register-email',
   templateUrl: './register-email.component.html',
   styleUrls: ['./register-email.component.css'],
-  imports: [ReactiveFormsModule, InputComponent, ButtonComponent, RouterLink],
+  imports: [
+    ReactiveFormsModule,
+    InputComponent,
+    ButtonComponent,
+    RouterLink,
+    RippleModule,
+    ToastModule,
+  ],
+  providers: [MessageService],
 })
 export class RegisterEmailComponent {
   private readonly authService = inject(AuthService);
-
+  private readonly messageService = inject(MessageService);
   @Input({ required: true }) emailGroup!: FormGroup;
 
   readonly emailSent = output<void>();
@@ -34,12 +46,21 @@ export class RegisterEmailComponent {
             this.emailSent.emit();
           }
         }),
-        catchError(() =>
-          of<AuthState>({
+        catchError((error: HttpErrorResponse) => {
+          const errorMessage =
+            error.error?.message ?? 'Something went wrong. Please try again.';
+
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Error',
+            detail: errorMessage,
+          });
+
+          return of<AuthState>({
             status: 'error',
-            message: 'Something went wrong. Please try again.',
-          }),
-        ),
+            message: errorMessage,
+          });
+        }),
         startWith<AuthState>({
           status: 'loading',
         }),

@@ -14,15 +14,27 @@ import { catchError, exhaustMap, map, of, startWith, Subject, tap } from 'rxjs';
 import { ConfirmOtpRequest, OtpState } from '../../model/auth.model';
 import { AuthService } from '../../service/auth.service';
 import { toSignal } from '@angular/core/rxjs-interop';
+import { MessageService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
+import { RippleModule } from 'primeng/ripple';
+import { HttpErrorResponse } from '@angular/common/http';
 @Component({
   selector: 'app-register-otp',
   templateUrl: './register-otp.component.html',
   styleUrls: ['./register-otp.component.css'],
-  imports: [ReactiveFormsModule, InputOtpModule, ButtonComponent],
+  imports: [
+    ReactiveFormsModule,
+    InputOtpModule,
+    ButtonComponent,
+    ToastModule,
+    RippleModule,
+  ],
+  providers: [MessageService],
 })
 export class RegisterOtpComponent implements OnInit, OnDestroy {
   private readonly fb = inject(FormBuilder);
   private readonly authService = inject(AuthService);
+  private readonly messageService = inject(MessageService);
 
   readonly counter = signal(60);
   private timer?: ReturnType<typeof setInterval>;
@@ -64,12 +76,23 @@ export class RegisterOtpComponent implements OnInit, OnDestroy {
             this.codeSent.emit();
           }
         }),
-        catchError(() =>
-          of<OtpState>({
+        catchError((error: HttpErrorResponse) => {
+          console.log(error);
+
+          const errorMessage =
+            error.error?.message ?? 'Something went wrong. Please try again.';
+
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Error',
+            detail: errorMessage,
+          });
+
+          return of<OtpState>({
             status: 'error',
-            message: 'Verification code is invalid or has expired.',
-          }),
-        ),
+            message: errorMessage,
+          });
+        }),
         startWith<OtpState>({
           status: 'loading',
         }),
