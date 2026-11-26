@@ -24,6 +24,7 @@ export class InputComponent {
   @Input({ required: true }) forId = '';
   @Input() inputValue = '';
   @Input() errorMessage = '';
+
   private onChange: (value: string) => void = () => {};
   private onTouched: () => void = () => {};
 

@@ -1,12 +1,13 @@
 .btn {
-  /* background-color: #155dfc; */
-  /* color: #fff; */
   width: 100%;
   text-align: center;
   border: 1px solid #155dfc;
   height: 46px;
   &:hover {
     cursor: pointer;
+  }
+  &:disabled {
+    cursor: not-allowed;
   }
   span {
     display: flex;
@@ -18,4 +19,9 @@
       width: 16px;
     }
   }
+}
+::ng-deep .p-progress-spinner {
+  width: 40px;
+  height: 40px;
+  stroke-width: 4;
 }

@@ -3,11 +3,16 @@
   [style.backgroundColor]="bgColor"
   [style.color]="textColor"
   (click)="clicked($event)"
+  [disabled]="isDisabled"
 >
-  <span>
-    {{ value }}
-    @if (showArrow) {
-      <svg lucideChevronRight></svg>
-    }
-  </span>
+  @if (showSpinner) {
+    <p-progressSpinner ariaLabel="loading" />
+  } @else {
+    <span>
+      {{ value }}
+      @if (showArrow) {
+        <svg lucideChevronRight></svg>
+      }
+    </span>
+  }
 </button>

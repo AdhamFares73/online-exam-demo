@@ -15,8 +15,9 @@
       (input)="onInput($event)"
       (blur)="onBlur()"
       [value]="inputValue"
-      class="form-control"
+      class="h-11 p-2.5 border border-gray-300 w-full focus:outline-none focus:ring-2 focus:ring-blue-100"
       [class.pr-10]="type === 'password'"
+      [class.border-red-600]="errorMessage !== ''"
     />
 
     @if (type === 'password') {
@@ -38,8 +39,8 @@
   </div>
 
   @if (errorMessage !== '') {
-    <div class="alert alert-danger">
+    <p class="text-sm text-red-500">
       {{ errorMessage }}
-    </div>
+    </p>
   }
 </div>

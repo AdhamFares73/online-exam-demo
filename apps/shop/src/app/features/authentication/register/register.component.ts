@@ -5,28 +5,24 @@ import { RegisterOtpComponent } from './register-otp/register-otp.component';
 import { RegisterInfoComponent } from './register-info/register-info.component';
 import { RegisterPasswordComponent } from './register-password/register-password.component';
 import { RegisterProgressComponent } from './register-progress/register-progress.component';
-// import { ButtonComponent } from '../../../shared/components/button/button.component';
-import { RouterLink } from '@angular/router';
 import { passwordMatchValidator } from '../model/password-match.validator';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css'],
   imports: [
-    RouterLink,
     ReactiveFormsModule,
     RegisterEmailComponent,
     RegisterOtpComponent,
     RegisterInfoComponent,
     RegisterPasswordComponent,
     RegisterProgressComponent,
-    // ButtonComponent,
   ],
 })
 export class RegisterComponent {
   private readonly fb = inject(FormBuilder);
 
-  readonly currentStep = signal(0);
+  readonly currentStep = signal(2);
 
   readonly showProgress = computed(() => this.currentStep() > 0);
 

@@ -1,14 +1,32 @@
-// Start Login
-export interface Login {
-  username: string;
-  password: string;
-}
-export interface authResponse {
-  user: User;
-  token: string;
+export interface SendEmailVerificationRequest {
+  email: string;
 }
 
-export interface User {
+export interface SendEmailVerificationResponse {
+  message: string;
+  code: string;
+}
+
+export interface ConfirmOtpRequest {
+  email: string;
+  code: string;
+}
+
+export interface ConfirmOtpResponse {
+  message: string;
+}
+
+export interface RegisterRequest {
+  username: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+  firstName: string;
+  lastName: string;
+  phone: string;
+}
+
+export interface RegisteredUser {
   id: string;
   username: string;
   email: string;
@@ -22,18 +40,24 @@ export interface User {
   createdAt: string;
   updatedAt: string;
 }
-// End Login
 
-// Start Register
-
-export interface Register {
-  username: string;
-  email: string;
-  password: string;
-  confirmPassword: string;
-  firstName: string;
-  lastName: string;
-  phone: string;
+export interface RegisterResponse {
+  user: RegisteredUser;
+  token: string;
 }
 
-// End Register
+export interface ApiResponse {
+  message: string;
+}
+
+export type AuthState =
+  | { status: 'idle' }
+  | { status: 'loading' }
+  | { status: 'success'; data: SendEmailVerificationResponse }
+  | { status: 'error'; message: string };
+
+export type OtpState =
+  | { status: 'idle' }
+  | { status: 'loading' }
+  | { status: 'success'; data: ConfirmOtpResponse }
+  | { status: 'error'; message: string };

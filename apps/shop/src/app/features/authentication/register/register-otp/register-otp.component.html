@@ -15,8 +15,8 @@
       >
     </p>
   </div>
-
-  <form [formGroup]="otpForm" (ngSubmit)="submit()" class="space-y-2">
+  @let current = this.state();
+  <form [formGroup]="otpForm" (ngSubmit)="sendOtp()" class="space-y-2">
     <label for="otp" class="block text-sm font-medium text-gray-700">
       Verification Code
     </label>
@@ -32,16 +32,20 @@
         Please enter a valid 6-digit verification code.
       </p>
     }
-    <button
-      type="button"
-      class="text-sm font-semibold text-[#165DFF] hover:text-blue-700"
-      (click)="otpForm.reset()"
-    >
-      Resend Code
-    </button>
 
+    @if (current.status === 'error') {
+      <p class="text-sm text-red-500">
+        {{ current.message }}
+      </p>
+    }
     <div class="mt-9">
-      <app-button bgColor="#eff6ff" textColor="#000" value="Verify Code" />
+      <app-button
+        [bgColor]="otpForm.invalid ? '#DCDFE3' : '#eff6ff'"
+        textColor="#000"
+        value="Verify Code"
+        [showSpinner]="current.status === 'loading' ? true : false"
+        [isDisabled]="otpForm.invalid"
+      />
     </div>
   </form>
 </div>
